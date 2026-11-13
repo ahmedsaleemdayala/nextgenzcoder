@@ -1,40 +1,113 @@
-# Ahmed Saleem: personal portfolio
+# Ahmed Saleem | Portfolio
 
-Next.js (App Router, JavaScript) + Tailwind CSS 3 + Framer Motion. No TypeScript, no Bootstrap.
+Personal portfolio of **Ahmed Saleem**, an Accounts Manager with 15+ years in finance and accounting, and a full stack web and app developer (NextGenzCoder). Built with Next.js, Tailwind CSS and Framer Motion.
 
-## Run
+**Live site:** https://nextgenzcoder.vercel.app
+
+![Portfolio hero section](docs/preview-hero.jpg)
+![Projects section](docs/preview-projects.jpg)
+
+## What's on the site
+
+- **Hero** with a short introduction, Download CV, View Projects and Contact buttons
+- **About** with a professional experience timeline, education (newest first) and additional courses, with completed courses and ongoing learning kept separate
+- **Projects**: three featured builds (Burger House, Waseel360, Meridian Watch) plus earlier work, with GitHub and live-demo links where they exist
+- **Technology ecosystem**: skills grouped by area (frontend, backend, database and deployment, accounting and finance, data analytics, AI, professional tools), listed as skills with no made-up percentages
+- **Key statistics** counted from the CV and the project list
+- **Contact form** that emails every message to my inbox
+- Floating **WhatsApp** button fixed at the right edge of the screen
+- Sticky navigation with active-section highlight and a mobile menu
+- SEO: metadata, Open Graph image, JSON-LD (Person and WebSite), sitemap, robots, canonical URL
+- Accessible and reduced-motion friendly, responsive from phone to desktop
+
+## Tech stack
+
+| Area | Tools |
+| --- | --- |
+| Framework | Next.js (App Router), React, JavaScript |
+| Styling | Tailwind CSS 3 |
+| Animation | Framer Motion |
+| Icons | Lucide React, React Icons |
+| Font | Inter (self-hosted via Fontsource) |
+| Contact form | Web3Forms |
+| Hosting | Vercel |
+
+## Getting started
+
+Requires Node.js 20.9 or newer.
 
 ```bash
+git clone https://github.com/ahmedsaleemdayala/Portfolio.git
+cd Portfolio
 npm install
-npm run dev          # http://localhost:3000
-npm run build && npm start
+cp .env.example .env      # on Windows: copy .env.example .env
+npm run dev
 ```
 
-## Contact form (Web3Forms, same service as the old portfolio)
+Open http://localhost:3000.
 
-The form posts from the browser straight to Web3Forms, exactly like the old portfolio did.
-(Web3Forms' free plan rejects server-side requests, which is why a server route failed on localhost.)
+### Scripts
 
-Messages are delivered to the email the access key was created with.
-To receive them at **ahmedsaleemdayala@gmail.com**: go to https://web3forms.com, enter that email, copy the key
-that arrives, and put it in `.env.local`:
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create the production build |
+| `npm start` | Run the production build locally |
+
+### Environment variables
+
+Create a `.env` file in the project root. It is git-ignored, so it never reaches GitHub.
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Yes | Access key for the contact form. Messages go to the email the key was created with. |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Public URL of the site, used for canonical, Open Graph and sitemap URLs. |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | No | Google Search Console verification token. |
+
+Get a free Web3Forms key at https://web3forms.com by entering the email address that should receive messages.
+
+`NEXT_PUBLIC_` values are read when the site is built. After changing one (locally or on Vercel), restart `npm run dev` or redeploy.
+
+## How the contact form works
+
+The form validates the fields in the browser (name, email, subject, message), blocks double submits while sending, and posts to Web3Forms, which emails the message to my inbox. A hidden honeypot field catches simple bots. The success message appears only after Web3Forms confirms delivery, and any failure shows an error with email and WhatsApp as fallbacks.
+
+Web3Forms' free plan only accepts requests from the browser, which is why there is no server route.
+
+## Editing the content
+
+Almost everything lives in one file: [`src/data/site.js`](src/data/site.js). It holds experience, education, courses, projects, skills, statistics and social links. The stats are calculated from the project and experience lists, so they update on their own.
+
+- CV: replace `public/Ahmed_Saleem_CV.pdf` and keep the file name
+- Photo: `src/assets/ahmed-saleem.jpg`
+- Favicon: `app/icon.png`, `app/apple-icon.png`, `app/favicon.ico`
+- Social preview image: `public/og-image.png`
+
+## Project structure
 
 ```
-NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your-key
+app/                  Layout, page, SEO (robots, sitemap) and favicon files
+public/               CV (PDF) and Open Graph image
+src/
+  assets/             Photo and logo mark
+  components/         Navbar, Hero, About, Projects, TechEcosystem, Stats,
+                      Contact, Footer, WhatsAppButton and shared helpers
+  data/site.js        All site content
+  lib/validate.js     Contact form validation
+docs/                 Screenshots used in this README
 ```
 
-Restart `npm run dev` after changing it. On Vercel/Netlify add the same variable in Environment Variables.
+## Deploying to Vercel
 
-## SEO / showing up for "Ahmed Saleem"
+1. Push to the `main` branch. Vercel builds and deploys automatically on every push.
+2. In Vercel, open Project Settings, then Environment Variables, and add `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` and `NEXT_PUBLIC_SITE_URL`.
+3. If you add or change an environment variable, trigger a redeploy so the new value is built in.
 
-1. Deploy to a real URL and set `NEXT_PUBLIC_SITE_URL` to it.
-2. Add the site in Google Search Console, verify it (paste the token into `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`),
-   submit `https://YOUR-URL/sitemap.xml`, and use "Request indexing" on the home page.
-3. Link to the site from your GitHub, LinkedIn and Instagram profiles. Google uses those links to connect the name to the site.
+## Contact
 
-## Where to edit content
+- Portfolio: https://nextgenzcoder.vercel.app
+- Email: ahmedsaleemdayala@gmail.com
+- LinkedIn: https://www.linkedin.com/in/ahmed-saleem-31100a382/
+- GitHub: https://github.com/ahmedsaleemdayala
 
-Everything is in `src/data/site.js`: experience, education, courses, projects, skills, stats, social links,
-and `TESTIMONIALS` (empty = placeholder layout; add `{ quote, name, role }` and it renders automatically).
-The CV is `public/Ahmed_Saleem_CV.pdf`. Replace the file, keep the name.
-Favicon files are in `app/` (`icon.png`, `apple-icon.png`, `favicon.ico`). OG image: `public/og-image.png`.
+All rights reserved. The code is public for reference; please don't reuse my photo, CV or personal content.

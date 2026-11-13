@@ -6,7 +6,7 @@ export const SITE = {
   brand: 'NextGenzCoder',
   title: 'Accounts Manager | Full Stack Web & App Developer',
   tagline: 'Bridging Business, Finance & Technology Through Modern Web Solutions and Data-Driven Thinking.',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://nextgenzcoder.netlify.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://nextgenzcoder.vercel.app',
   location: 'Karachi, Pakistan',
   email: 'ahmedsaleemdayala@gmail.com',
   phoneDisplay: '+92 333 3093878',
